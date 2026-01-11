@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rylie & Remy's Math Adventure 🎯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            text-align: center;
+            transform: translateY(0);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        h1::after {
+            content: ' - Rylie & Remy\'s Practice';
+            font-size: 0.5em;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2em;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.6s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .question-card {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid #e0e7ff;
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .question-card.correct {
+            background: #d4f4dd;
+            border-color: #48bb78;
+        }
+
+        .question-card.incorrect {
+            background: #ffd4d4;
+            border-color: #f56565;
+        }
+
+        .question-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8em;
+            color: #4a5568;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.3em;
+            font-family: 'Fredoka', sans-serif;
+            border: 3px solid #cbd5e0;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3em;
+            font-family: 'Fredoka', sans-serif;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .history-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 3px dashed #e0e7ff;
+        }
+
+        .history-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8em;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
+        .history-day {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .history-day h3 {
+            font-family: 'Fredoka', sans-serif;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .result-message {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2em;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            animation: bounce 0.6s ease-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .result-message.perfect {
+            background: linear-gradient(135deg, #d4f4dd 0%, #b7e4c7 100%);
+            color: #2d6a4f;
+        }
+
+        .result-message.good {
+            background: linear-gradient(135deg, #fff4d4 0%, #ffe4b7 100%);
+            color: #b45309;
+        }
+
+        .new-day-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3em;
+            font-family: 'Fredoka', sans-serif;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .new-day-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(72, 187, 120, 0.4);
+        }
+
+        .welcome-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3em;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .welcome-page {
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('rylie-collage-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            margin: -20px;
+            padding: 20px;
+        }
+
+        .welcome-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%);
+            z-index: 1;
+        }
+
+        .welcome-page > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 60px 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .welcome-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            margin: 0 auto 30px;
+            display: block;
+            animation: photoFloat 3s ease-in-out infinite;
+        }
+
+        .welcome-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .welcome-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5em;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+
+        .date-display {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px 50px;
+            border-radius: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2em;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+            margin: 30px auto;
+            display: inline-block;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 25px 70px;
+            font-size: 1.8em;
+            font-family: 'Fredoka', sans-serif;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(72, 187, 120, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(72, 187, 120, 0.5);
+        }
+
+        .start-btn:active {
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        .motivational-message {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3em;
+            color: white;
+            margin-top: 30px;
+            padding: 25px 40px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            font-weight: 600;
+        }
+
+        .rylie-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            margin: 20px auto 10px;
+            display: block;
+            animation: photoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .photo-in-results {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .question-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- Content will be generated by JavaScript -->
+    </div>
+
+    <script>
+        // Rylie's photos
+        const ryliePhotos = [
+            'IMG_0184.jpeg',
+            'IMG_1120.jpeg',
+            '63bb0676a7cf887fd5ceca2eb270c467.jpeg',
+            'b82333add00bbe6d593be295c77263d8.jpeg',
+            'IMG_0166.jpeg',
+            'IMG_0630.jpeg',
+            '050ab498f22ce6bc1729988acc181f30.JPG',
+            'IMG_0483.JPG'
+        ];
+
+        // Select a random photo for today (for practice/results pages)
+        function getTodaysPhoto() {
+            const today = new Date().toDateString();
+            const savedPhoto = localStorage.getItem('todaysPhoto');
+            const savedDate = localStorage.getItem('photoDate');
+            
+            if (savedDate === today && savedPhoto) {
+                return savedPhoto;
+            }
+            
+            const randomPhoto = ryliePhotos[Math.floor(Math.random() * ryliePhotos.length)];
+            localStorage.setItem('todaysPhoto', randomPhoto);
+            localStorage.setItem('photoDate', today);
+            return randomPhoto;
+        }
+
+        const todaysPhoto = getTodaysPhoto();
+
+        // Storage helper functions
+        async function getData(key) {
+            try {
+                const result = await window.storage.get(key);
+                return result ? JSON.parse(result.value) : null;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        async function setData(key, value) {
+            try {
+                await window.storage.set(key, JSON.stringify(value));
+                return true;
+            } catch (error) {
+                console.error('Storage error:', error);
+                return false;
+            }
+        }
+
+        // App state
+        let currentUser = 'Rylie';
+        let currentProblems = [];
+        let userAnswers = [];
+        let submitted = false;
+        let showingWelcome = true;
+
+        // Generate a random problem
+        function generateProblem(max = 20) {
+            const num1 = Math.floor(Math.random() * max) + 1;
+            const num2 = Math.floor(Math.random() * max) + 1;
+            const operation = Math.random() > 0.5 ? '+' : '-';
+            
+            if (operation === '-' && num1 < num2) {
+                return generateProblem(max);
+            }
+            
+            const answer = operation === '+' ? num1 + num2 : num1 - num2;
+            return { num1, num2, operation, answer, id: `${num1}${operation}${num2}` };
+        }
+
+        // Generate daily problems
+        async function generateDailyProblems() {
+            const userData = await getData(`user:${currentUser}`);
+            const problems = [];
+            const problemIds = new Set();
+            
+            // Add problems from wrong answers pool
+            if (userData && userData.wrongProblems) {
+                const wrongToInclude = Math.min(10, userData.wrongProblems.length);
+                for (let i = 0; i < wrongToInclude; i++) {
+                    const problem = userData.wrongProblems[i];
+                    problems.push(problem);
+                    problemIds.add(problem.id);
+                }
+            }
+            
+            // Fill remaining with new random problems
+            while (problems.length < 20) {
+                const problem = generateProblem();
+                if (!problemIds.has(problem.id)) {
+                    problems.push(problem);
+                    problemIds.add(problem.id);
+                }
+            }
+            
+            return problems;
+        }
+
+        // Update wrong problems tracking
+        async function updateWrongProblems(results) {
+            const userData = await getData(`user:${currentUser}`) || { wrongProblems: [], history: [], streaks: {} };
+            
+            results.forEach(result => {
+                const problemId = result.problem.id;
+                
+                if (!result.correct) {
+                    // Add to wrong problems if not already there
+                    if (!userData.wrongProblems.find(p => p.id === problemId)) {
+                        userData.wrongProblems.push(result.problem);
+                    }
+                    // Reset streak
+                    userData.streaks[problemId] = 0;
+                } else {
+                    // Increment streak
+                    userData.streaks[problemId] = (userData.streaks[problemId] || 0) + 1;
+                    
+                    // Remove from wrong problems if streak >= 2
+                    if (userData.streaks[problemId] >= 2) {
+                        userData.wrongProblems = userData.wrongProblems.filter(p => p.id !== problemId);
+                        delete userData.streaks[problemId];
+                    }
+                }
+            });
+            
+            // Add to history
+            const today = new Date().toLocaleDateString();
+            userData.history.unshift({
+                date: today,
+                results: results,
+                score: results.filter(r => r.correct).length
+            });
+            
+            // Keep only last 3 days
+            userData.history = userData.history.slice(0, 3);
+            
+            await setData(`user:${currentUser}`, userData);
+        }
+
+        // Check if already completed today
+        async function hasCompletedToday() {
+            const userData = await getData(`user:${currentUser}`);
+            if (!userData || !userData.history || userData.history.length === 0) return false;
+            
+            const today = new Date().toLocaleDateString();
+            return userData.history[0].date === today;
+        }
+
+        // Render functions
+        function renderWelcomePage() {
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = today.toLocaleDateString('en-US', options);
+            
+            const motivationalMessages = [
+                "Let's make today amazing! 🌟",
+                "You're going to do great today! 💪",
+                "Ready to show off your math skills? 🎯",
+                "Time to shine, superstar! ✨",
+                "Let's have some fun with numbers! 🎨",
+                "Your brain is ready for this! 🧠",
+                "Let's make math magic happen! 🎪"
+            ];
+            
+            const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+            
+            document.getElementById('app').innerHTML = `
+                <div class="welcome-page">
+                    <div class="welcome-header">
+                        <h1 class="welcome-title">Welcome, Rylie! 🎯</h1>
+                        <p class="welcome-subtitle">Ready for today's math adventure?</p>
+                        <div class="date-display">
+                            📅 ${dateString}
+                        </div>
+                        <button class="start-btn" onclick="startPractice()">
+                            Start Practice! 🚀
+                        </button>
+                    </div>
+                    <div class="motivational-message">
+                        ${randomMessage}
+                    </div>
+                </div>
+            `;
+        }
+
+        function startPractice() {
+            showingWelcome = false;
+            renderMain();
+        }
+
+        async function renderMain() {
+            const completedToday = await hasCompletedToday();
+            
+            if (completedToday && !submitted) {
+                await renderResults(true);
+                return;
+            }
+            
+            if (currentProblems.length === 0) {
+                currentProblems = await generateDailyProblems();
+                userAnswers = new Array(20).fill('');
+            }
+            
+            const userData = await getData(`user:${currentUser}`) || { history: [] };
+            
+            document.getElementById('app').innerHTML = `
+                <div class="header">
+                    <img src="${todaysPhoto}" alt="Rylie" class="rylie-photo">
+                    <h1>🎯 Math Adventure</h1>
+                    <p class="welcome-text">Hi Rylie! Ready to practice? 🌟</p>
+                    <div class="stats">
+                        <div class="stat-box">📝 ${currentProblems.length} Problems</div>
+                        ${userData.wrongProblems ? `<div class="stat-box">🎯 ${userData.wrongProblems.length} To Master</div>` : ''}
+                    </div>
+                </div>
+                
+                <div class="main-content">
+                    ${submitted ? renderResultsContent() : renderQuestionsContent()}
+                </div>
+            `;
+            
+            // Add event listeners for inputs
+            if (!submitted) {
+                currentProblems.forEach((_, index) => {
+                    const input = document.getElementById(`answer-${index}`);
+                    if (input) {
+                        input.value = userAnswers[index];
+                        input.addEventListener('input', (e) => {
+                            userAnswers[index] = e.target.value;
+                        });
+                        input.addEventListener('keypress', (e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                                const nextInput = document.getElementById(`answer-${index + 1}`);
+                                if (nextInput) {
+                                    nextInput.focus();
+                                } else {
+                                    submitAnswers();
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+        function renderQuestionsContent() {
+            return `
+                <div class="question-grid">
+                    ${currentProblems.map((problem, index) => `
+                        <div class="question-card">
+                            <div class="question-text">
+                                ${problem.num1} ${problem.operation} ${problem.num2} = ?
+                            </div>
+                            <input 
+                                type="number" 
+                                class="answer-input" 
+                                id="answer-${index}"
+                                placeholder="?"
+                            >
+                        </div>
+                    `).join('')}
+                </div>
+                <button class="submit-btn" onclick="submitAnswers()">Submit Answers! ✨</button>
+            `;
+        }
+
+        function renderResultsContent() {
+            const results = currentProblems.map((problem, index) => {
+                const userAnswer = parseInt(userAnswers[index]);
+                const correct = userAnswer === problem.answer;
+                return { problem, userAnswer, correct };
+            });
+            
+            const score = results.filter(r => r.correct).length;
+            const isPerfect = score === 20;
+            
+            return `
+                <img src="${todaysPhoto}" alt="Rylie" class="photo-in-results">
+                <div class="result-message ${isPerfect ? 'perfect' : 'good'}">
+                    ${isPerfect ? '🌟 Perfect Score! You\'re Amazing! 🌟' : `Great Job! ${score} out of 20 correct! 🎉`}
+                </div>
+                
+                <div class="question-grid">
+                    ${results.map((result, index) => `
+                        <div class="question-card ${result.correct ? 'correct' : 'incorrect'}">
+                            <div class="question-text">
+                                ${result.problem.num1} ${result.problem.operation} ${result.problem.num2} = ${result.problem.answer}
+                            </div>
+                            <div style="text-align: center; font-size: 1.5em; margin-top: 10px;">
+                                ${result.correct ? '✅' : `❌ You wrote: ${result.userAnswer || '?'}`}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <button class="new-day-btn" onclick="startNewDay()">Practice More Tomorrow! 🚀</button>
+                
+                ${renderHistory()}
+            `;
+        }
+
+        async function renderResults(fromHistory = false) {
+            const userData = await getData(`user:${currentUser}`);
+            
+            document.getElementById('app').innerHTML = `
+                <div class="header">
+                    <img src="${todaysPhoto}" alt="Rylie" class="rylie-photo">
+                    <h1>🎯 Math Adventure</h1>
+                    <p class="welcome-text">Great work today, Rylie! 🌟</p>
+                </div>
+                
+                <div class="main-content">
+                    <div class="result-message good">
+                        You already completed today's practice! 🎉
+                    </div>
+                    
+                    <button class="new-day-btn" onclick="startNewDay()">Try New Problems Tomorrow! 🚀</button>
+                    
+                    ${userData && userData.history ? `
+                        <div class="history-section">
+                            <h2 class="history-title">Your Recent Progress 📊</h2>
+                            ${userData.history.map(day => `
+                                <div class="history-day">
+                                    <h3>${day.date} - Score: ${day.score}/20</h3>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px;">
+                                        ${day.results.map(r => 
+                                            `<span style="font-size: 1.2em;">${r.correct ? '✅' : '❌'}</span>`
+                                        ).join('')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function renderHistory() {
+            return ''; // History is only shown when already completed
+        }
+
+        async function submitAnswers() {
+            const results = currentProblems.map((problem, index) => {
+                const userAnswer = parseInt(userAnswers[index]);
+                const correct = userAnswer === problem.answer;
+                return { problem, userAnswer, correct };
+            });
+            
+            await updateWrongProblems(results);
+            submitted = true;
+            await renderMain();
+        }
+
+        function startNewDay() {
+            currentProblems = [];
+            userAnswers = [];
+            submitted = false;
+            showingWelcome = true;
+            renderWelcomePage();
+        }
+
+        // Initialize app - show welcome page first
+        renderWelcomePage();
+    </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Guide - Rylie & Remy's Math Adventure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #667eea;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .step {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3em;
+            margin-right: 15px;
+        }
+
+        .step-content {
+            display: inline-block;
+            vertical-align: top;
+            width: calc(100% - 60px);
+        }
+
+        .option-card {
+            background: white;
+            border: 3px solid #e0e7ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .option-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #48bb78;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .test-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3em;
+            margin-top: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+        }
+
+        .test-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(72, 187, 120, 0.4);
+        }
+
+        .highlight {
+            background: #fff4d4;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f5b942;
+            margin: 20px 0;
+        }
+
+        code {
+            background: #e0e7ff;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #764ba2;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Setup Guide</h1>
+        <p class="center" style="font-size: 1.2em; color: #4a5568; margin-bottom: 30px;">
+            Welcome! Let's get Rylie & Remy's Math Adventure online!
+        </p>
+
+        <h2>🚀 Quick Start (Test Locally First)</h2>
+        <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <strong>Download all files</strong> to a single folder on your computer
+            </div>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <strong>Open</strong> <code>index.html</code> in any web browser (Chrome, Safari, Firefox, Edge)
+            </div>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <strong>Test it out!</strong> Make sure everything works before hosting online
+            </div>
+        </div>
+
+        <div class="center">
+            <a href="index.html" class="test-button">Test the Website Now! 🎯</a>
+        </div>
+
+        <h2>🌐 Hosting Options (Make it Live Online!)</h2>
+        
+        <div class="option-card">
+            <div class="option-title">
+                Option 1: GitHub Pages
+                <span class="badge">FREE</span>
+                <span class="badge" style="background: #667eea;">RECOMMENDED</span>
+            </div>
+            <p><strong>Best for:</strong> Free forever, professional URL, easy updates</p>
+            <ul>
+                <li>Visit <a href="https://github.com" target="_blank">github.com</a> and create free account</li>
+                <li>Create new repository named "rylie-remy-math"</li>
+                <li>Upload all your files</li>
+                <li>Go to Settings → Pages → Select "main" branch</li>
+                <li>Your site will be live at: <code>username.github.io/rylie-remy-math</code></li>
+            </ul>
+        </div>
+
+        <div class="option-card">
+            <div class="option-title">
+                Option 2: Netlify
+                <span class="badge">FREE</span>
+                <span class="badge" style="background: #f5576c;">EASIEST</span>
+            </div>
+            <p><strong>Best for:</strong> Drag-and-drop simplicity, instant deployment</p>
+            <ul>
+                <li>Visit <a href="https://www.netlify.com" target="_blank">netlify.com</a> and sign up free</li>
+                <li>Drag your folder onto their site</li>
+                <li>Instant deployment - done in 30 seconds!</li>
+                <li>Get URL like: <code>rylie-remy-math.netlify.app</code></li>
+            </ul>
+        </div>
+
+        <div class="option-card">
+            <div class="option-title">
+                Option 3: Vercel
+                <span class="badge">FREE</span>
+            </div>
+            <p><strong>Best for:</strong> Fast performance, developer-friendly</p>
+            <ul>
+                <li>Visit <a href="https://vercel.com" target="_blank">vercel.com</a> and sign up free</li>
+                <li>Import your project</li>
+                <li>Deploy instantly</li>
+                <li>Get URL like: <code>rylie-remy-math.vercel.app</code></li>
+            </ul>
+        </div>
+
+        <div class="highlight">
+            <strong>💡 Pro Tip:</strong> All three options are completely free and work great! 
+            Start with whichever seems easiest to you. You can always switch later.
+        </div>
+
+        <h2>🎨 Custom Domain (Optional)</h2>
+        <p>Want a custom URL like <code>rylieandremymath.com</code>?</p>
+        <ul>
+            <li>Purchase domain ($10-15/year) from Namecheap, Google Domains, or GoDaddy</li>
+            <li>Connect it to your hosting (all three options above support custom domains)</li>
+            <li>Suggested names: rylieremymath.com, rylieremy.com, rr-math.com</li>
+        </ul>
+
+        <h2>📱 Technical Details</h2>
+        <div class="option-card" style="border-color: #e0e7ff;">
+            <ul>
+                <li>✅ Works on all devices (computer, tablet, phone)</li>
+                <li>✅ No server or database needed</li>
+                <li>✅ All data saved locally in browser</li>
+                <li>✅ Privacy-friendly - no data collection</li>
+                <li>✅ No maintenance required</li>
+            </ul>
+        </div>
+
+        <div class="center" style="margin-top: 40px; padding-top: 40px; border-top: 2px solid #e0e7ff;">
+            <p style="color: #4a5568; font-size: 1.1em;">
+                Made with ❤️ for Rylie & Remy<br>
+                <small style="color: #a0aec0;">Happy Learning! 🌟</small>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
